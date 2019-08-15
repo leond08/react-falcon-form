@@ -2,15 +2,17 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import Validation from '../Validation/Validation'
 
 export default class InputText extends Component {
+
     constructor(props) {
         super(props)
 
         // bind the event
         this.onKeyPress = this.onKeyPress.bind(this)
         this.onInput = this.onInput.bind(this)
+        
     }
 
     static defaultProps = {
@@ -25,12 +27,16 @@ export default class InputText extends Component {
     }
     
     onKeyPress(e) {
-        console.log('I\'m being press...')
+        // if (!Validation.validate(e, this.props.validationFilter)) {
+        //     this.props.getError(false)
+        // }
+        this.props.onChange(false)
     }
 
     onInput(e) {
         console.log('Someone is inputting...')
     }
+
 
     render() {
 

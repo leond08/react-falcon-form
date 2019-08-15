@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import InputText from 'react-falcon-form'
+import InputText from './Components/InputText/InputText'
 
 export default class App extends Component {
 
@@ -14,6 +14,7 @@ export default class App extends Component {
 
   callBackFunction = childResponse => {
     if (!childResponse) {
+      console.log(childResponse)
       this.setState({
         error: "this is an error"
       })
@@ -23,7 +24,7 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <InputText getError={this.callBackFunction}  validationFilter="email" />
+        <InputText onChange={this.callBackFunction}  validationFilter="email" />
         <span>{this.state.error}</span>
       </div>
     )

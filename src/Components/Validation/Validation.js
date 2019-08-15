@@ -14,14 +14,18 @@ export default class Validation {
         alphanum: /[a-z0-9_]/i
     }
 
+
     /**
      * Validate method
      * 
      * @param {Object} e the event object
-     * @param {string} validationFilter the types of validation i.e alpha, alphanum, digit, email
+     * @param {String|Array} validationFilter the types of validation i.e alpha, alphanum, digit, email
      */
     static validate(e, validationFilter) {
         // validation goes here
+        let value = e.target.value
+        const express = new RegExp(this.DEFAULT_ERROR_MESSAGES[validationFilter])
+        return express.test(value)
     }
 
 }
