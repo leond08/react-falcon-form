@@ -12,11 +12,12 @@ export default class App extends Component {
     }
   }
 
-  callBackFunction = childResponse => {
-    if (!childResponse) {
-      console.log(childResponse)
+  callBackFunction = (e, error) => {
+    if (!error) {
+      console.log(error)
       this.setState({
-        error: "this is an error"
+        error: "this is an error",
+        value: null
       })
     }
   }
@@ -24,9 +25,11 @@ export default class App extends Component {
   render () {
     return (
       <div>
-        <InputText onChange={this.callBackFunction}  validationFilter="email" />
+        <InputText onChange={(e) => this.setState({ value:  e.target.value })} 
+            onInput={this.callBackFunction} 
+            validationFilter={/[a-z_]/i} />
         <span>{this.state.error}</span>
-      </div>
+      </div> 
     )
   }
 }

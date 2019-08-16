@@ -1,7 +1,7 @@
-'use strict'
-
+import './InputText.css'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import Validation from '../Validation/Validation'
 
 export default class InputText extends Component {
@@ -16,7 +16,11 @@ export default class InputText extends Component {
     }
 
     static defaultProps = {
-        
+        onKeyPress: null,
+        onInput: null,
+        validationFilter: null,
+        placeholder: null,
+        id: null
     }
 
     static propTypes = {
@@ -27,19 +31,32 @@ export default class InputText extends Component {
     }
     
     onKeyPress(e) {
-        // if (!Validation.validate(e, this.props.validationFilter)) {
-        //     this.props.getError(false)
-        // }
-        this.props.onChange(false)
+        if (this.props.onKeyPress) {
+            this.props.onKeyPress(e)
+        }
+
+        if (this.props.validationFilter) {
+            Validation.onPress(e, this.props.validationFilter)
+        }
     }
 
     onInput(e) {
-        console.log('Someone is inputting...')
+        let validateStatus = true
+        if (this.props.validationFilter) {
+            validateStatus = Validation.validate(e, this.props.validationFilter)
+            this.props.onInput(e, validateStatus)
+        }
     }
 
 
     render() {
 
-        return <input type="text" onKeyPress={this.onKeyPress} onInput={this.onInput} />
+        let inputProps = Object.assign({}, this.props)
+
+        delete inputProps.validationFilter
+        delete inputProps.onKeyPress
+        delete inputProps.onInput
+
+        return <input {...inputProps} onKeyPress={this.onKeyPress} onInput={this.onInput} />
     }
 }

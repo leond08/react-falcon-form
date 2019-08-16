@@ -1,6 +1,3 @@
-'use strict'
-
-
 export default class Validation {
 
     /**
@@ -10,22 +7,42 @@ export default class Validation {
     static DEFAULT_EXPRESSION = {
         digit: /^[0-9]*$/,
         email: /[a-z0-9_\.\-@]/i,
-        alpha: /[a-z_]/i,
+        letter: /[a-z_]/i,
         alphanum: /[a-z0-9_]/i
     }
 
+    /**
+     * Validate value upon key press
+     * 
+     * @param {Object} e the event object
+     * @param {String|Array} validationFilter the types of validation i.e letter, alphanum, digit, email
+     */
+    static onPress(e, validationFilter) {
+        const regex = this.DEFAULT_EXPRESSION[validationFilter] ? this.DEFAULT_EXPRESSION[validationFilter] : validationFilter
+        const charCode = e.charCode || e.keyCode || e.which;
+        const stringCode = String.fromCharCode(charCode);
+
+        if (!regex.test(stringCode)) {
+            e.preventDefault();
+        }
+    }
 
     /**
      * Validate method
      * 
      * @param {Object} e the event object
-     * @param {String|Array} validationFilter the types of validation i.e alpha, alphanum, digit, email
+     * @param {String|Array} validationFilter the types of validation i.e letter, alphanum, digit, email
      */
     static validate(e, validationFilter) {
         // validation goes here
         let value = e.target.value
-        const express = new RegExp(this.DEFAULT_ERROR_MESSAGES[validationFilter])
-        return express.test(value)
+        let validateStatus = true
+        const regex = this.DEFAULT_EXPRESSION[validationFilter] ? this.DEFAULT_EXPRESSION[validationFilter] : validationFilter
+        if (value && !regex.test(value)) {
+            validateStatus = false
+        }
+
+        return validateStatus
     }
 
 }

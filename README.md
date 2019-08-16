@@ -15,7 +15,7 @@ npm install --save react-falcon-form
 ```jsx
 import React, { Component } from 'react'
 
-import InputText from 'react-falcon-form/InputText'
+import { InputText } from 'react-falcon-form'
 
 class Example extends Component {
   render () {
