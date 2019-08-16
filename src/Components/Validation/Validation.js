@@ -6,9 +6,9 @@ export default class Validation {
      */
     static DEFAULT_EXPRESSION = {
         digit: /^[0-9]*$/,
-        email: /[a-z0-9_\.\-@]/i,
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         letter: /[a-z_]/i,
-        alphanum: /[a-z0-9_]/i
+        alphanum: /^[a-z0-9]+$/i
     }
 
     /**
@@ -31,7 +31,7 @@ export default class Validation {
      * Validate method
      * 
      * @param {Object} e the event object
-     * @param {String|Array} validationFilter the types of validation i.e letter, alphanum, digit, email
+     * @param {String|Regex} validationFilter the types of validation i.e letter, alphanum, digit, email
      */
     static validate(e, validationFilter) {
         // validation goes here

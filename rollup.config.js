@@ -58,23 +58,24 @@ import pkg from './package.json'
 // export default configs
 
 export default {
-  input: 'src/exports/InputText.js',
+  input: 'src/index.js',
   output: [
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      //sourcemap: true
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
+      //sourcemap: true
     }
   ],
   plugins: [
     external(),
     postcss({
-      modules: true
+      //modules: true
+      extract: 'dist/style.css'
     }),
     url(),
     svgr(),

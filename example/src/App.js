@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
-import InputText from 'react-falcon-form'
+import { InputText, Password } from 'react-falcon-form'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default class App extends Component {
 
@@ -12,19 +12,27 @@ export default class App extends Component {
     }
   }
 
-  callBackFunction = childResponse => {
-    if (!childResponse) {
+  callBackFunction = (e, error) => {
+    if (!error) {
       this.setState({
-        error: "this is an error"
+        error: "this is an error",
+        value: null
       })
     }
   }
 
   render () {
     return (
-      <div>
-        <InputText getError={this.callBackFunction}  validationFilter="email" />
-        <span>{this.state.error}</span>
+      <div className="container">
+          <div className="form-group">
+              <label htmlFor="exampleBasicInputText">Basic Input Text</label>
+              <InputText onChange={(e) => this.setState({ value:  e.target.value })} 
+                  onInput={this.callBackFunction} 
+                  validationFilter="alphanum" />
+              <span>{this.state.error}</span>
+              <label htmlFor="examplePassword">Password</label>
+              <Password validationFilter="digit" onInput={this.callBackFunction}/>
+          </div>
       </div>
     )
   }
