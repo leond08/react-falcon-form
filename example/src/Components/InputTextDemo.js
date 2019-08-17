@@ -31,7 +31,7 @@ export default class InputTextDemo extends Component {
     return (
         <div className="row">
         <div className="col-lg">
-            <div className="card card-style">
+            <div className="card card-style" id="basicInput">
                 <div className="card-heading"><h5>Basic Input</h5></div>
                 <div className="card-body">
                     <div className="form-group">
@@ -45,7 +45,7 @@ export default class InputTextDemo extends Component {
                     </figure>
                 </div>
             </div>
-            <div className="card card-style">
+            <div className="card card-style" id="tooltip">
                 <div className="card-heading"><h5>Basic Input w/ tooltip</h5></div>
                 <div className="card-body">
                     <div className="form-group">
@@ -65,7 +65,7 @@ export default class InputTextDemo extends Component {
                     </figure>
                 </div>
             </div>
-            <div className="card card-style">
+            <div className="card card-style" id="inputValidation">
                 <div className="card-heading"><h5>Input validation w/ help text</h5></div>
                 <div className="card-body">
                 <div className="form-group">
@@ -88,7 +88,7 @@ export default class InputTextDemo extends Component {
                 </figure>
             </div>
             </div>
-            <section>
+            <section id="documentation">
                 <h1>Documentation</h1>
                 <div className="documentation">
                     <h4>Import</h4>
@@ -132,7 +132,17 @@ export default class InputTextDemo extends Component {
                             <tr>
                                 <td>helpText</td>
                                 <td>String</td>
-                                <td>Attach help message</td>
+                                <td>Show help message</td>
+                            </tr>
+                            <tr>
+                                <td>tooltip</td>
+                                <td>String</td>
+                                <td>Display tooltip message</td>
+                            </tr>
+                            <tr>
+                                <td>tooltipOptions</td>
+                                <td>JSON</td>
+                                <td>Option like position; Accepts top, left, bottom, right</td>
                             </tr>
                         </tbody>
                     </table>
@@ -153,7 +163,13 @@ export default class InputTextDemo extends Component {
                     <a href="#basicInput">Basic Input</a>
                 </li>
                 <li>
-                    <a href="#inputValidation">Input with validation</a>
+                    <a href="#tooltip">Basic Input w/ tooltip</a>
+                </li>
+                <li>
+                    <a href="#inputValidation">Input validation w/ help text</a>
+                </li>
+                <li>
+                    <a href="#documentation">Documentation</a>
                 </li>
             </ul>
             </section>

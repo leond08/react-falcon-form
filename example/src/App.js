@@ -16,7 +16,9 @@ export default class App extends Component {
         <div className="App">
         <div className="d-flex" id="wrapper">
           <div className="bg-light border-right" id="sidebar-wrapper">
-            <div className="sidebar-heading">React Falcon Form</div>
+            <Link to="/">
+              <div className="sidebar-heading">React Falcon Form</div>
+            </Link>
             <div className="list-group list-group-flush">
               <Link to="/inputtext">
                 <li className="list-group-item list-group-item-action bg-light">Input</li>
