@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InputText, Password } from 'react-falcon-form'
+import { InputText } from 'react-falcon-form'
 import { Link } from "react-router-dom";
 
 export default class InputTextDemo extends Component {
@@ -18,6 +18,12 @@ export default class InputTextDemo extends Component {
         error: "this is an error",
         value: null
       })
+    }
+  }
+
+  customValidation = (e) => {
+    if(e.target.value.length == 0) {
+        console.log("required fields")
     }
   }
 
@@ -45,8 +51,7 @@ export default class InputTextDemo extends Component {
                 <div className="card-body">
                 <div className="form-group">
                     <InputText 
-                        onChange={(e) => this.setState({ value:  e.target.value })} 
-                        onInput={this.callBackFunction} 
+                        onChange={(e) => this.setState({ value:  e.target.value })}  
                         validationFilter="digit"
                         blockKeys />
                 </div>
@@ -79,7 +84,7 @@ export default class InputTextDemo extends Component {
                 <div className="documentation">
                     <h4>Properties</h4>
                     <p>InputText passes any valid attribute of input element.</p>
-                    <table class="table table-bordered">
+                    <table className="table table-bordered">
                         <thead className="thead-dark">
                             <tr>
                             <th scope="col">Name</th>
@@ -90,7 +95,7 @@ export default class InputTextDemo extends Component {
                         <tbody>
                             <tr>
                                 <td>validationFilter</td>
-                                <td>String|Regex</td>
+                                <td>String|Regex|Function</td>
                                 <td>Specify the validation to be used.</td>
                             </tr>
                             <tr>
