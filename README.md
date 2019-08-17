@@ -26,6 +26,30 @@ class Example extends Component {
 }
 ```
 
+## Development
+
+Install the dependencies
+
+```bash
+npm install
+```
+
+Build the module
+
+```bash
+npm start
+```
+
+You can view the examples in example folder
+
+  Go to example folder
+
+  ```bash
+  npm install
+
+  npm start
+  ```
+
 ## License
 
 MIT © [leond08](https://github.com/leond08)
