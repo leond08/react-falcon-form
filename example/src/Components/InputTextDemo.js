@@ -141,8 +141,8 @@ export default class InputTextDemo extends Component {
                             </tr>
                             <tr>
                                 <td>tooltipOptions</td>
-                                <td>JSON</td>
-                                <td>Option like position; Accepts top, left, bottom, right</td>
+                                <td>Json</td>
+                                <td>Options to pass; {`{ position: "top|left|bottom|right"}`}</td>
                             </tr>
                         </tbody>
                     </table>
