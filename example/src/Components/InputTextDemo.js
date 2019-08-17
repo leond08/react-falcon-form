@@ -45,14 +45,34 @@ export default class InputTextDemo extends Component {
                     </figure>
                 </div>
             </div>
-
             <div className="card card-style">
-                <div className="card-heading"><h5>Input with validation</h5></div>
+                <div className="card-heading"><h5>Basic Input w/ tooltip</h5></div>
+                <div className="card-body">
+                    <div className="form-group">
+                        <InputText onChange={(e) => this.setState({ value:  e.target.value })}
+                            tooltip="Hello I am a tooltip!" tooltipOptions={{
+                                position: "top"
+                            }} />
+                    </div>
+                    <p>Code:</p>
+                    <figure className="highlight">
+                        <code className="prettyprint language-jsx">
+                            {`<InputText onChange={(e) => this.setState({ value:  e.target.value })}
+                                tooltip="Hello I am a tooltip!" 
+                                tooltipOptions={{position: "top"}} />`
+                            }
+                        </code>
+                    </figure>
+                </div>
+            </div>
+            <div className="card card-style">
+                <div className="card-heading"><h5>Input validation w/ help text</h5></div>
                 <div className="card-body">
                 <div className="form-group">
                     <InputText 
                         onChange={(e) => this.setState({ value:  e.target.value })}  
                         validationFilter="digit"
+                        helpText="Accepts digit only"
                         blockKeys />
                 </div>
                 <p>Code:</p>
@@ -61,6 +81,7 @@ export default class InputTextDemo extends Component {
                         {`<InputText
                         onChange={(e) => this.setState({ value:  e.target.value })} 
                         validationFilter="digit" 
+                        helpText="Accepts digit only"
                         blockKeys />`
                         }
                     </code>
@@ -107,6 +128,11 @@ export default class InputTextDemo extends Component {
                                 <td>onInput</td>
                                 <td>Function</td>
                                 <td>Return the validation status.</td>
+                            </tr>
+                            <tr>
+                                <td>helpText</td>
+                                <td>String</td>
+                                <td>Attach help message</td>
                             </tr>
                         </tbody>
                     </table>
