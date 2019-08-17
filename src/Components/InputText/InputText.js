@@ -71,12 +71,12 @@ export default class InputText extends Component {
 
     componentWillUnmount() {
         if (this.helpText) {
-            this.helpText.destroy()
+            //this.helpText.destroy()
             this.helpText = null
         }
 
         if (this.tooltip) {
-            this.tooltip.destroy()
+            //this.tooltip.destroy()
             this.tooltip = null
         }
     }
