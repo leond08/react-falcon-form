@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Validation from '../Validation/Validation'
+import HelpText from '../HelpText/HelpText'
+import ToolTip from '../ToolTip/ToolTip'
 
 export default class InputText extends Component {
     constructor(props) {
@@ -20,6 +22,9 @@ export default class InputText extends Component {
         validationFilter: null,
         placeholder: null,
         id: null,
+        helpText: null,
+        tooltip: null,
+        tooltipOptions: null,
         blockKeys: false // if true do not display the inputted keys that are invalid
     }
 
@@ -28,7 +33,10 @@ export default class InputText extends Component {
         onInput: PropTypes.func,
         onKeyPress: PropTypes.func,
         validationFilter: PropTypes.any,
-        blockKeys: PropTypes.bool
+        blockKeys: PropTypes.bool,
+        helpText: PropTypes.string,
+        tooltip: PropTypes.string,
+        tooltipOptions: PropTypes.object
     }
     
     onKeyPress(e) {
@@ -51,6 +59,43 @@ export default class InputText extends Component {
         }
     }
 
+    componentDidMount() {
+        if (this.props.helpText) {
+            this.renderHelpText()
+        }
+
+        if (this.props.tooltip) {
+            this.renderToolTip()
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.helpText) {
+            this.helpText.destroy()
+            this.helpText = null
+        }
+
+        if (this.tooltip) {
+            this.tooltip.destroy()
+            this.tooltip = null
+        }
+    }
+
+    renderToolTip() {
+        this.tooltip = new ToolTip({
+            target: this.element,
+            message: this.props.tooltip,
+            options: this.props.tooltipOptions
+        })
+    }
+
+    renderHelpText() {
+        this.helpText = new HelpText({
+            target: this.element,
+            message: this.props.helpText
+        })
+    }
+
 
     render() {
         let className = classNames('form-control', this.props.className )
@@ -61,7 +106,9 @@ export default class InputText extends Component {
         delete inputProps.onKeyPress
         delete inputProps.onInput
         delete inputProps.blockKeys
+        delete inputProps.helpText
+        delete inputProps.tooltipOptions
 
-        return <input {...inputProps} className={className} onKeyPress={this.onKeyPress} onInput={this.onInput} />
+        return <input ref={(el) => this.element = el} {...inputProps} className={className} onKeyPress={this.onKeyPress} onInput={this.onInput} />
     }
 }
