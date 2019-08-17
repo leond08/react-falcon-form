@@ -53,7 +53,7 @@ export default class InputText extends Component {
 
 
     render() {
-        let className = classNames('form-control', 'f-inputtext-form')
+        let className = classNames('form-control', this.props.className )
 
         let inputProps = Object.assign({}, this.props)
 

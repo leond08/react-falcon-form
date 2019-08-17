@@ -1,39 +1,62 @@
 import React, { Component } from 'react'
-import { InputText, Password } from 'react-falcon-form'
-import 'bootstrap/dist/css/bootstrap.css'
+import Home from './Components/Home'
+import InputTextDemo from './Components/InputTextDemo'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  Link
+} from "react-router-dom";
 
 export default class App extends Component {
-
-  constructor() {
-    super()
-
-    this.state = {
-      error: null
-    }
-  }
-
-  callBackFunction = (e, error) => {
-    if (!error) {
-      this.setState({
-        error: "this is an error",
-        value: null
-      })
-    }
-  }
-
-  render () {
+  render() {
     return (
-      <div className="container">
-          <div className="form-group">
-              <label htmlFor="exampleBasicInputText">Basic Input Text</label>
-              <InputText onChange={(e) => this.setState({ value:  e.target.value })} 
-                  onInput={this.callBackFunction} 
-                  validationFilter="alphanum" />
-              <span>{this.state.error}</span>
-              <label htmlFor="examplePassword">Password</label>
-              <Password validationFilter="digit" onInput={this.callBackFunction}/>
+      <Router>
+        <div className="App">
+        <div className="d-flex" id="wrapper">
+          <div className="bg-light border-right" id="sidebar-wrapper">
+            <div className="sidebar-heading">React Falcon Form</div>
+            <div className="list-group list-group-flush">
+              <Link to="/inputtext">
+                <li className="list-group-item list-group-item-action bg-light">Input</li>
+              </Link>
+              <Link to="/validationFilter">
+                <li className="list-group-item list-group-item-action bg-light">ValidationFilter</li>
+              </Link>
+              <Link to="/button">
+                <li className="list-group-item list-group-item-action bg-light">Button</li>
+              </Link>
+            </div>
           </div>
-      </div>
-    )
+
+          <div id="page-content-wrapper">
+
+            <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+              <button className="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+
+              <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+                  <li className="nav-item active">
+                    <a className="nav-link" href="https://github.com/leond08/react-falcon-form">Source Code <span className="sr-only">(current)</span></a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+
+              <div className="container-fluid">
+                {/* APP Routes only. avoid dashes(-) when naming routes */}
+                <Route exact path="/" component={Home} />
+                <Route path="/inputtext" component={InputTextDemo} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Router>
+    );
   }
 }

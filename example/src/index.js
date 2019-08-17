@@ -1,4 +1,6 @@
-//import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import './simple-sidebar.css'
+import './style.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
