@@ -18,6 +18,7 @@ export default class Validation {
      * @param {String|Array} validationFilter the types of validation i.e letter, alphanum, digit, email
      */
     static onPress(e, validationFilter) {
+        if (typeof validationFilter === "function") return validationFilter(e);
         const regex = this.DEFAULT_EXPRESSION[validationFilter] ? this.DEFAULT_EXPRESSION[validationFilter] : validationFilter
         const charCode = e.charCode || e.keyCode || e.which;
         const stringCode = String.fromCharCode(charCode);
@@ -34,6 +35,7 @@ export default class Validation {
      * @param {String|Regex} validationFilter the types of validation i.e letter, alphanum, digit, email
      */
     static validate(e, validationFilter) {
+        if (typeof validationFilter === "function") return validationFilter(e);
         // validation goes here
         let value = e.target.value
         let validateStatus = true
