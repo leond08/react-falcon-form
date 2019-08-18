@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Home from './Components/Home'
 import InputTextDemo from './Components/InputTextDemo'
+import FormsDemo from './Components/FormsDemo'
 import {
   BrowserRouter as Router,
   Route,
@@ -25,6 +26,9 @@ export default class App extends Component {
               </Link>
               <Link to="/validationFilter">
                 <li className="list-group-item list-group-item-action bg-light">ValidationFilter</li>
+              </Link>
+              <Link to="/formsDemo">
+                <li className="list-group-item list-group-item-action bg-light">Forms</li>
               </Link>
               <Link to="/button">
                 <li className="list-group-item list-group-item-action bg-light">Button</li>
@@ -54,6 +58,7 @@ export default class App extends Component {
                 {/* APP Routes only. avoid dashes(-) when naming routes */}
                 <Route exact path="/" component={Home} />
                 <Route path="/inputtext" component={InputTextDemo} />
+                <Route path="/formsDemo" component={FormsDemo} />
               </div>
             </div>
           </div>

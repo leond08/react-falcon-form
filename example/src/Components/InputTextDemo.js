@@ -23,7 +23,7 @@ export default class InputTextDemo extends Component {
 
   customValidation = (e) => {
     if(e.target.value.length == 0) {
-        console.log("required fields")
+        return false
     }
   }
 
@@ -73,7 +73,7 @@ export default class InputTextDemo extends Component {
                         onChange={(e) => this.setState({ value:  e.target.value })}  
                         validationFilter="digit"
                         helpText="Accepts digit only"
-                        blockKeys />
+                        blockKeys/>
                 </div>
                 <p>Code:</p>
                 <figure className="highlight">
