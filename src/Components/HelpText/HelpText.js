@@ -1,5 +1,3 @@
-import className from 'classnames'
-
 export default class HelpText {
     constructor(props) {
         this.target = props.target
@@ -9,7 +7,7 @@ export default class HelpText {
     }
 
     create() {
-        let className = 'text-muted'
+        let className = 'text-muted f-help-text'
         this.container = document.createElement('small')
         this.container.className = className
         this.container.innerHTML = this.message
