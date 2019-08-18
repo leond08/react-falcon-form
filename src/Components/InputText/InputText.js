@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import Validation from '../Validation/Validation'
 import HelpText from '../HelpText/HelpText'
 import ToolTip from '../ToolTip/ToolTip'
+import Form, {FormConsumer} from '../Forms/Form/Form'
 
 export default class InputText extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class InputText extends Component {
         // bind the event
         this.onKeyPress = this.onKeyPress.bind(this)
         this.onInput = this.onInput.bind(this)
-        
+
     }
     
     static defaultProps = {
@@ -96,9 +97,8 @@ export default class InputText extends Component {
         })
     }
 
-
     render() {
-        let className = classNames('form-control', this.props.className )
+        let className = classNames('form-control', this.props.className)
 
         let inputProps = Object.assign({}, this.props)
 
@@ -108,7 +108,22 @@ export default class InputText extends Component {
         delete inputProps.blockKeys
         delete inputProps.helpText
         delete inputProps.tooltipOptions
+        delete inputProps.onChange
 
-        return <input ref={(el) => this.element = el} {...inputProps} className={className} onKeyPress={this.onKeyPress} onInput={this.onInput} />
+        return (
+            <FormConsumer>
+                {(values, setValue) => {
+                    return <input ref={(el) => this.element = el}
+                            onChange={(e) => {
+                                e.preventDefault()
+                                setValue(this.props.name, e.target.value)
+                            }}
+                            {...inputProps} 
+                            className={className} 
+                            onKeyPress={this.onKeyPress} 
+                            onInput={this.onInput} />
+                }}  
+            </FormConsumer>
+        )
     }
 }
