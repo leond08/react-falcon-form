@@ -1,0 +1,26 @@
+{
+  "name": "react-falcon-form-example",
+  "homepage": "https://leond08.github.io/react-falcon-form",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-falcon-form": "file:..",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^1.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1"
+  }
+}
