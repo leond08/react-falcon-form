@@ -22,7 +22,7 @@ export default class Calendar extends Component {
     }
 
     static defaultProps = {
-        inline: false,
+        value: '',
         onInputFocus: null,
         numberOfMonths: 1,
         locale: {
@@ -33,6 +33,7 @@ export default class Calendar extends Component {
     }
 
     static propTypes = {
+        value: PropTypes.any,
         onInputFocus: PropTypes.func,
         numberOfMonths: PropTypes.number,
         locale: PropTypes.object
@@ -74,6 +75,51 @@ export default class Calendar extends Component {
                  }
             }
         })
+    }
+
+    setLocalTime(date) {
+
+        const localTime = date.getTime();
+        const localOffset = date.getTimezoneOffset() * 60000;
+        const utc = localTime + localOffset;
+        const offset = 8;
+        const pht = utc + (3600000*offset);
+        
+        return new Date(pht);
+    }
+
+    format(metaDate) {
+        // basic date format mm/dd/yyyy
+        let newDate = new Date(metaDate.year, metaDate.month, metaDate.day)
+
+        return `${newDate.getMonth()}/${newDate.getDate()}/${newDate.getFullYear()}`
+    }
+
+    updateDate(event, metaDate) {
+        let value = this.format(metaDate)
+
+        if (this.props.onChange) {
+            this.props.onChange({
+                event: event,
+                value: value,
+                target: {
+                    value: value
+                }
+            })
+        }
+
+        event.preventDefault()
+    }
+
+    onSelectDate(event, metaDate) {
+        if (!metaDate.isClickable) {
+            event.preventDefault()
+            return
+        }
+
+        this.updateDate(event, metaDate)
+
+        event.preventDefault()
     }
 
     onInputFocus(event) {
@@ -152,7 +198,7 @@ export default class Calendar extends Component {
         let monthRows = Math.ceil((firstDay + daysInMonth) / 7)
         let days = []
         let date = 1;
-        //creating individual cells, filing them up with data.
+
         for (let i = 0; i < monthRows; i++) { 
             let week = []
             if (i === 0) {
@@ -315,7 +361,7 @@ export default class Calendar extends Component {
         let className = classNames({ 'bg-primary text-white': date.active, 'text-muted': !date.isClickable })
 
         return (
-            <span className={className}>
+            <span className={className} onClick={ e => this.onSelectDate(e, date)}>
                 {content}
             </span>
         );
@@ -363,7 +409,7 @@ export default class Calendar extends Component {
     renderDateViewGrid(monthData, weekDays) {
         const dayNames = this.renderDayNames(weekDays);
         const dates = this.renderDates(monthData);
-        const className = classNames('table', this.props.className)
+        const className = classNames('table table-responsive-lg', this.props.className)
         return (
                 <table className={className} id="calendar">
                     <thead>
@@ -393,7 +439,9 @@ export default class Calendar extends Component {
 
     renderInputElement() {
         return (
-            <InputText ref={(e) => this.inputElement = ReactDOM.findDOMNode(e)}
+            <InputText value={this.props.value} 
+                type="text"
+                ref={(e) => this.inputElement = ReactDOM.findDOMNode(e)}
                 onFocus={this.onInputFocus}/>
         )
     }
@@ -412,4 +460,4 @@ export default class Calendar extends Component {
         
     }
     
-}ou
+}
